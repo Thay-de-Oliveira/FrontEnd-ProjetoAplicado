@@ -1,90 +1,178 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(LoginApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  static const String _title = 'Flutter Stateful Clicker Counter';
-  // This widget is the root of your application.
+class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
+      title: 'Tela de Login - Projeto aplicado',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: LoginPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-  // This class is the configuration for the state.
+class LoginPage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: const Text('Flutter Demo Click Counter'),
-      ),
+      backgroundColor: Colors.blue,
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: const TextStyle(fontSize: 25),
-            ),
-          ],
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              //LOGO
+              Container(
+                margin: EdgeInsets.only(
+                    bottom: 20.0), // Espaçamento abaixo da imagem
+                child: Image.asset('assets/imagens/logo.png', width: 50),
+              ),
+
+              //USUÁRIO
+              Container(
+                alignment: Alignment
+                    .centerLeft, // Alinha o texto com o início do campo
+                child: Text(
+                  'Usuário',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(height: 5), //Espaçamento entre o texto e o campo
+
+              //Campo de login
+              Container(
+                width: 315,
+                height: 40,
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 0.70, color: Color(0xFF091B4A)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  shadows: [
+                    BoxShadow(
+                      color: Color(0x3F000000),
+                      blurRadius: 4,
+                      offset: Offset(0, 4),
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.all(10.0),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+
+              //Texto SENHA
+              Container(
+                alignment: Alignment
+                    .centerLeft, // Alinha o texto com o início do campo
+                child: Text(
+                  'Senha',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(height: 5), //Espaçamento entre o texto e o campo
+
+              //Campo de senha
+              Container(
+                //Senha
+                width: 315,
+                height: 40,
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 0.70, color: Color(0xFF091B4A)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  shadows: [
+                    BoxShadow(
+                      color: Color(0x3F000000),
+                      blurRadius: 4,
+                      offset: Offset(0, 4),
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.all(10.0),
+                  ),
+                ),
+              ),
+
+              SizedBox(
+                  height:
+                      50), // Espaço entre os campos e o link "Esqueci minha senha"
+              TextButton(
+                onPressed: () {
+                  // Implementar a lógica de recuperação de senha aqui
+                  print('Esqueci minha senha');
+                },
+                child: Text(
+                  'Esqueci minha senha',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+
+              SizedBox(height: 10),
+              Container(
+                //Botão
+                width: 150,
+                height: 28,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Implementar a lógica de autenticação aqui
+                    String username = _usernameController.text;
+                    String password = _passwordController.text;
+                    print('Usuário: $username, Senha: $password');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      side: BorderSide(width: 0.90, color: Color(0xFF091B4A)),
+                    ),
+                  ),
+                  child: Text(
+                    'Avançar',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15), // Altera a cor do texto
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
